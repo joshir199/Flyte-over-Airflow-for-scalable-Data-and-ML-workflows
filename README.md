@@ -15,6 +15,10 @@ Limitation:
 4.  They are not built with strong types for inputs and outputs between tasks. This makes it more susceptible to failures.
 5.  It only supports Python language which makes least flexible in tech world.
 
+
+![](https://github.com/joshir199/Flyte-over-Airflow-for-scalable-Data-and-ML-workflows/blob/main/airflow.png)
+
+
 **************************
 # Flyte
 The infinitely scalable and flexible workflow orchestration platform that seamlessly unifies data, ML and analytics stacks. It uses tasks and workflows running with the help Job Schedulers.
@@ -26,6 +30,9 @@ Advantages :
 3. It can help in ETL/ELT as well as various others ML pipelines, thus enables different types of workloads together.
 4. Strongly typed inputs and outputs can simplify data validation and highlight incompatibilities between tasks making it easier to identify and troubleshoot errors before launching the workflow.
 5. Recovery capability requires Rerun only failed tasks in a workflow to save time, resources, and more easily debug.
+
+
+![](https://github.com/joshir199/Flyte-over-Airflow-for-scalable-Data-and-ML-workflows/blob/main/flyte_pipeline.png)
 
 Moreover, Flyte offers a significant advantage in terms of environment and dependency isolation. 
 Code and libraries are packaged within Docker images, enabling the use of different libraries and versions per team or even for specific tasks.
