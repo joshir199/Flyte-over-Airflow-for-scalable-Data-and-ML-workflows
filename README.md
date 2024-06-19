@@ -60,3 +60,50 @@ ____________________________________________________
 
 # Solution: Airflow + Flyte = Maximum Flexibility
 
+Combining both Airflow and Flyte can use to construct the ETL pipelines in Airflow and machine learning pipelines in Flyte and use the provider to trigger the machine learning or Flyte pipelines from within Airflow.
+
+# 1.Flyte Operator
+Flyte operator helps in triggering the flyte task/workflows from within Airflow.
+
+```bash
+from datetime import datetime, timedelta
+
+from airflow import DAG
+
+from flyte_provider.operators.flyte import FlyteOperator
+from flyte_provider.sensors.flyte import FlyteSensor
+
+with DAG(
+    dag_id="example_flyte",
+    schedule_interval=None,
+    start_date=datetime(2021, 1, 1),
+    dagrun_timeout=timedelta(minutes=60),
+    catchup=False,
+) as dag:
+    task = FlyteOperator(
+        task_id="diabetes_predictions",
+        flyte_conn_id="flyte_conn",
+        project="flytesnacks",
+        domain="development",
+        launchplan_name="ml_training.pima_diabetes.diabetes.diabetes_xgboost_model",
+        inputs={"test_split_ratio": 0.66, "seed": 5},
+    )
+
+    sensor = FlyteSensor(
+        task_id="sensor",
+        execution_name=task.output,
+        project="flytesnacks",
+        domain="development",
+        flyte_conn_id="flyte_conn",
+    )
+
+    task >> sensor
+```
+
+Add airflow-provider-flyte to the requirements.txt file and create an Airflow connection to Flyte by setting the Conn Id to flyte_conn and Conn Type to Flyte.
+
+# 2. Flyte Sensor
+It helps in monitoring execution and allows to trigger downstream processes only when the Flyte executions are complete.
+
+******************
+Reference : https://flyte.org/  , https://airflow.apache.org/
