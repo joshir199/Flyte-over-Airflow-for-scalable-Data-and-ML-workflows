@@ -40,5 +40,23 @@ Code and libraries are packaged within Docker images, enabling the use of differ
 Additionally, Flyte organizes projects into logical domains, such as development, staging, and production. 
 These domains facilitate a step-by-step promotion of code to production ensuring adherence to best development practices like CI/CD, unit/integration testing, and code review. 
 
+# Machine Learning vs. ETL Tasks
+Machine learning tasks have different requirements from ETL tasks (famously used by Airflow).
+
+-> Machine learning needs to run resource-intensive computations.
+
+-> Machine learning needs data lineage in place or a data-aware platform to simplify the debugging process.
+
+-> Machine learning needs code to be versioned to ensure reproducibility.
+
+-> Machine learning needs infrastructure automation.
+
+Airflow was designed to orchestrate data workflows. It is useful to run ETL/ELT tasks due to the ease with which it connects to a standard set of third-party sources to achieve data orchestration.
+But It supports building machine learning pipelines by leveraging operators such as Amazon Sagemaker and Databricks. This may not provide full Dynamic ML pipeline orchestration benefits.
+
 With Flyte’s environment isolation, teams can maintain control over their dependencies and ensure reproducibility while adhering to robust software engineering practices throughout the project lifecycle.
+
+____________________________________________________
+
+# Solution: Airflow + Flyte = Maximum Flexibility
 
